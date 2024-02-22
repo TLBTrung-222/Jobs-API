@@ -8,6 +8,7 @@ const authorizedMiddleware = async (req, res, next) => {
     // if user already logged in, verify the token user sent
     const { authorization: authHeader } = req.headers; // "Bearer token"
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        throw new UnauthenticatedError("Authentication invalid");
     }
 
     const token = authHeader.split(" ")[1];
